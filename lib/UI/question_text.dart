@@ -13,7 +13,7 @@ class QuestionText extends StatefulWidget {
 }
 
 class QuestionTextState extends State<QuestionText>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   Animation<double> _fontSizeAnimation;
   AnimationController _fontSizeAnimationController;
 
@@ -33,7 +33,25 @@ class QuestionTextState extends State<QuestionText>
       setState(() {});
     });
 
+    //to Start Animation
     _fontSizeAnimationController.forward();
+  }
+
+  @override
+  void didUpdateWidget(QuestionText oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if(oldWidget._question !=  widget._question) {
+      _fontSizeAnimationController.reset();
+      _fontSizeAnimationController.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _fontSizeAnimationController.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
